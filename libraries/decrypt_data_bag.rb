@@ -22,12 +22,12 @@ class Chef
     def decrypt_data_bag(bag, item = node.chef_environment,
         secret_file = Chef::EncryptedDataBagItem::DEFAULT_SECRET_FILE)
       Chef::Log.info self.class
-      DataBag.validate_name!(bag.to_s)
-      DataBagItem.validate_id!(item)
-      secret = EncryptedDataBagItem.load_secret(secret_file)
-      EncryptedDataBagItem.load(bag, item, secret)
+      Chef::DataBag.validate_name!(bag.to_s)
+      Chef::DataBagItem.validate_id!(item)
+      secret = Chef::EncryptedDataBagItem.load_secret(secret_file)
+      Chef::EncryptedDataBagItem.load(bag, item, secret)
     rescue Exception
-      Log.error("Failed to load data bag item: #{bag.inspect} #{item.inspect}")
+      Chef::Log.error("Failed to load data bag item: #{bag.inspect} #{item.inspect}")
       raise
     end
   end
