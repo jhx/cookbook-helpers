@@ -24,7 +24,7 @@ class Chef
       Chef::Log.info self.class
       Chef::DataBag.validate_name!(bag.to_s)
       Chef::DataBagItem.validate_id!(item)
-      secret = Chef::EncryptedDataBagItem.load_secret(secret_file)
+      secret = Chef::EncryptedDataBagItem.load_secret("#{secret_file}")
       Chef::EncryptedDataBagItem.load(bag, item, secret)
     rescue Exception
       Chef::Log.error("Failed to load data bag item: #{bag.inspect} #{item.inspect}")
